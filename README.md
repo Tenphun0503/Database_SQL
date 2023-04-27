@@ -54,6 +54,7 @@ Query data
        - `>, >=, <, <=, =, <>or!=, BETWEEN...AND..., IN (...), LIKE ..., IS NULL`
          - `BWTEEEN...AND...` are inclusive
          - `LIKE ...`: `_` matches one character, `%` matches multiple characters
+           - e.g. `name LIKE '___'`: query name with length of 3
      - Logical Operator
          - `AND or &&, OR or ||, NOT or !`
    - `GROUP BY`: group by condition
@@ -74,10 +75,42 @@ Query data
      - e.g. `SELECT add, count(*) add_count FROM emp GROUP BY add HAVING add_count > 3`
      - > we filtered grouped data that were 3 or less. We can use alias or `HAVING count(*)>3`
    - `ORDER BY`: sort by condition
+     - `SELECT c FROM table ORDER BY c1 sort_rule1, c2 sort_rule2;`
+     - `sort_rule`
+       - `ASC`(default)
+       - `DESC`
    - `LIMIT`: pagination
+     - `SELECT c FROM table LIMIT start_index, query_amount`
+       - MySQL is 0 indexed
+       - start_index = (query_page - 1) * amount_per_page
+       - for the first page, start_index can be omitted
+       - pagination is a dialect
+   - DQL Write Order
+     - select - from - where - group by - having - order by - limit
+   - DQL Execute Order
+     - from - where - group by - having - select - order by - limit
 5. DCL (Data Control Language)  
-Create database user, grant access
-   - 
+Create and modify database user, grant access
+   - Query user
+     - `USE mysql;`
+     - `SELECT * FROM user;` all info of users are store in table 'user' of database 'mysql'
+   - Create user
+     - `CREATE USER 'username'@'hostname' IDENTIFIED BY 'password';`
+       - `hostname` set as `%` to match any host
+   - Edit user password
+     - `ALTER USER 'username'@'hostname' IDENTIFIED WITH 'password' BY 'new_password';`
+   - Delete user
+     - `DROP USER 'username'@'hostname';`
+   - Privilege
+     - `ALL, ALL PRIVILEGES`
+     - `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `ALTER`, `DROP`, `CREATE`
+   - Check access
+     - `SHOW GRANTS FOR 'username'@'hostname';`
+   - grant access
+     - `GRANT privilege ON database.table TO 'username'@'hostname';`
+     - `*.*`: all tables of all databases
+   - remove access
+     - `REVOKE privilege ON database.table FROM 'username'@'hostname';`
 #### Datatype
 - Numeric  
 
@@ -121,6 +154,7 @@ Create database user, grant access
 | TIMESTAMP | 4    | YYYY-MM-DD HH:MM:SS  |
 
 #### Function
+
 #### Constraint
 #### Multi-table query 
 #### Transaction
