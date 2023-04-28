@@ -154,7 +154,10 @@ Create and modify database user, grant access
 | TIMESTAMP | 4    | YYYY-MM-DD HH:MM:SS  |
 
 #### Function
-
+1. String Function
+2. Mathematical  Function
+3. Date and Time Function
+4. Procedure Function
 #### Constraint
 #### Multi-table query 
 #### Transaction
