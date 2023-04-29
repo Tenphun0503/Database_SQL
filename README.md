@@ -155,10 +155,62 @@ Create and modify database user, grant access
 
 #### Function
 1. String Function
+   - `CONCAT(S1,S2,...)`
+   - `LOWER(str)`
+   - `UPPER(str)`
+   - `LPAD(str,n,pad)` pads the left side of the string with a certain character `pad` until total of n in length
+   - `RPAD(str,n,pad)` pads the right side of the string with a certain character `pad` until total of n in length
+   - `TRIM(str)`
+   - `SUBSTRING(str,start,len)`
 2. Mathematical  Function
+   - `CEIL(x)`
+   - `FLOOR(x)`
+   - `MOD(x,y)`
+   - `RAND()` random number between 0 and 1
+   - `ROUND(x,y)` rounds a numeric value `x` to a specified precision `y`
 3. Date and Time Function
-4. Procedure Function
+   - `CURDATE()` return current date
+   - `CURTIME()` return current time
+   - `NOW()` return current time and date
+   - `YEAR(date)` get year from a date
+   - `MONTH(date)` get month from a date
+   - `DAY(date)` get day from a date
+   - `DATE_ADD(date, INTERVAL expr type)` return date + a mount of time `expr`
+     - `type` can be `DAY`, `MONTH`, `YEAR`
+   - `DATEDIFF(date1, date2)` days between date1 and date2
+     - `date` can be form of `'YYYY-MM-DD'`
+4. Flow Function
+   - `IF(value, t, f)`
+   - `IFNULL(value1, value2)` return value1 if value is not null, else return value2
+   - `CASE WHEN [val1] THEN [res1] ... ELSE [default] END` if val1 is true, return res1, ...
+   - `CASE [expr] WHEN [val1] THEN [res1] ... ELSE [default] END` if expr==val1, return res1 ...
 #### Constraint
+1. Intro
+   - Constraints help to ensure the accuracy, consistency, and integrity of data in a database.
+2. Constraint
+    - `NOT NULL`
+    - `UNIQUE`
+    - `PRIMARY KEY`
+        - `AUTO_INCREMENT`
+    - `DEFAULT`
+    - `CHECK` ensure a field satisfies a condition (MySQL 8.0.16)
+    - `FOREIGN KEY`
+3. Foreign Key
+   - A FOREIGN KEY constraint is used to establish a relationship between two tables.
+   - It ensures that the values of a column match another table's primary key column.
+   - Foreign key ensures the accuracy, consistency, and integrity among different tables
+   - Use of Foreign key
+     - `[foreign_key_name] FOREIGN KEY (column) REFERENCE parent_table(column_of_parent_table)`
+     - `ALTER TABLE table ADD CONSTRAINT foreign_key_name FOREIGN KEY (column) REFERENCE parent_table(column_of_parent_table)`
+     - `ALTER TABEL table DROP FOREIGN KEY foregin_key_name`
+   - Foreign Key Constraint
+     - `NO ACTION`: when delete/update in parent table, if foreign key data exists, take no action
+     - `RESTRICT`: same as `NO ACTION`
+     - `CASCADE`: when delete/update in parent table, if foreign key data exists, delete them together
+     - `SET NULL`: when delete/update in parent table, if foreign key data exists, set to null (can't be not null)
+     - `SET DEFAULT`: when update in parent table, set a default value for foreign key column of child table 
+   - Foreign Key Constraint Apply
+     - `ALTER TABLE table ADD CONSTRAINT fk FOREIGN KEY (c) REFERENCE pt(cop) ON UPDATE CASCADE ON DELETE CASCADE;`
 #### Multi-table query 
 #### Transaction
 
